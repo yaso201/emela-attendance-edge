@@ -1,0 +1,129 @@
+{%- extends "templates/web.html" -%}
+
+{%- block head_include -%}
+{{ super() }}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/attendance_edge/css/attendance_ui.css">
+{%- endblock -%}
+
+{%- block page_content -%}
+<main class="ae-shell ae-teacher" data-page="attendance-teacher">
+    <section class="ae-topbar" aria-label="Console enseignant">
+        <div class="ae-topbar__left">
+            <button class="ae-sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Ouvrir la liste des seances">&#9776;</button>
+            <div>
+                <p class="ae-kicker">Attendance local</p>
+                <h1>Console enseignant</h1>
+            </div>
+        </div>
+        <div class="ae-sync-pill" id="teacher-sync-pill">Sync locale</div>
+    </section>
+
+    <section class="ae-login-panel" aria-label="Acces enseignant" style="max-width: 520px; margin: 40px auto">
+        <label>
+            <span>Identifiant enseignant</span>
+            <input id="teacher-id" autocomplete="username" inputmode="text">
+        </label>
+        <div>
+            <span class="ae-pin-label">PIN a 6 chiffres</span>
+            <div class="ae-pin-group">
+                <input class="ae-pin-digit" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="PIN chiffre 1">
+                <input class="ae-pin-digit" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="PIN chiffre 2">
+                <input class="ae-pin-digit" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="PIN chiffre 3">
+                <input class="ae-pin-digit" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="PIN chiffre 4">
+                <input class="ae-pin-digit" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="PIN chiffre 5">
+                <input class="ae-pin-digit" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="PIN chiffre 6">
+                <button class="ae-pin-toggle" id="pin-toggle" type="button" aria-label="Afficher le PIN">&#128065;</button>
+            </div>
+        </div>
+        <button class="ae-button ae-button-primary" id="teacher-load" type="button">Charger ma journee</button>
+        <p class="ae-version-text">Session conservee 8h · LaNEM</p>
+    </section>
+
+    <section class="ae-alert" id="teacher-message" role="alert" aria-live="assertive" hidden></section>
+
+    <div id="drawer-backdrop" class="ae-drawer-backdrop" hidden></div>
+    <section class="ae-layout">
+        <aside class="ae-session-list" id="session-sidebar" aria-label="Seances du jour">
+            <div class="ae-section-heading">
+                <h2>Seances du jour</h2>
+                <button class="ae-icon-button" id="teacher-refresh" type="button" aria-label="Rafraichir">↻</button>
+            </div>
+            <div id="teacher-sessions" class="ae-stack"></div>
+        </aside>
+
+        <section class="ae-session-workbench" aria-live="polite">
+            <div class="ae-empty" id="teacher-empty">
+                <h2>Selectionnez une seance</h2>
+            </div>
+
+            <div id="teacher-session-detail" hidden>
+                <div class="ae-session-header" id="session-header-normal">
+                    <div>
+                        <p class="ae-kicker" id="session-status-label">Seance</p>
+                        <h2 id="session-title"></h2>
+                        <p id="session-meta" class="ae-muted"></p>
+                    </div>
+                    <button class="ae-button ae-button-primary" id="open-session" type="button">Ouvrir</button>
+                </div>
+
+                <div id="pending-cta" class="ae-pending-cta" hidden>
+                    <h2>Ouvrir la seance</h2>
+                    <p id="pending-cta-meta" class="ae-muted"></p>
+                    <button class="ae-button ae-button-primary ae-button-xl" id="pending-cta-open" type="button">Ouvrir MAINTENANT</button>
+                </div>
+
+                <div id="session-content" class="ae-session-content">
+                <div class="ae-metrics" aria-label="Etat de presence">
+                    <div><strong id="metric-validated">0</strong><span>Valides</span></div>
+                    <div><strong id="metric-pending">0</strong><span>En attente</span></div>
+                    <div><strong id="metric-remaining">0</strong><span>Restants</span></div>
+                    <div><strong id="metric-leave">0</strong><span>Conges</span></div>
+                </div>
+
+                <div class="ae-work-grid">
+                    <section class="ae-qr-panel" aria-label="QR de signature">
+                        <div class="ae-section-heading">
+                            <h3>QR de signature</h3>
+                            <span id="qr-refresh-label" class="ae-muted"></span>
+                        </div>
+                        <div id="qr-frame" class="ae-qr-frame"></div>
+                        <button class="ae-button ae-button-primary ae-wide" id="qr-fullscreen" type="button">&#128250; Presenter le QR</button>
+                        <pre id="qr-fallback" class="ae-code" hidden></pre>
+                    </section>
+
+                    <section class="ae-roster-panel" aria-label="Liste de la classe">
+                        <div class="ae-section-heading">
+                            <h3>Liste de la classe</h3>
+                            <span id="roster-count" class="ae-muted"></span>
+                        </div>
+                        <input id="roster-search" class="ae-roster-search" type="search" placeholder="Chercher un etudiant..." autocomplete="off">
+                        <div id="roster-filters" class="ae-roster-filters">
+                            <button class="ae-filter-chip ae-filter-chip--active" data-filter="all" type="button">Tous</button>
+                            <button class="ae-filter-chip" data-filter="remaining" type="button">Restants (<span id="filter-count-remaining">0</span>)</button>
+                            <button class="ae-filter-chip" data-filter="pending" type="button">En attente (<span id="filter-count-pending">0</span>)</button>
+                            <button class="ae-filter-chip" data-filter="validated" type="button">Valides (<span id="filter-count-validated">0</span>)</button>
+                        </div>
+                        <div id="roster-list" class="ae-roster-list"></div>
+                    </section>
+                </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <div id="qr-fullscreen-overlay" class="ae-qr-fullscreen" hidden>
+        <div class="ae-qr-fullscreen__qr" id="qr-fullscreen-svg"></div>
+        <div class="ae-qr-fullscreen__bar">
+            <span id="qr-fs-validated">0 valides</span>
+            <span id="qr-fs-remaining">0 restants</span>
+            <button class="ae-button" id="qr-fullscreen-close" type="button">Fermer (ESC)</button>
+        </div>
+    </div>
+</main>
+
+<script>
+window.attendanceEdge = window.attendanceEdge || {};
+window.attendanceEdge.csrfToken = "{{ csrf_token }}";
+</script>
+<script src="/assets/attendance_edge/js/attendance_teacher.js"></script>
+{%- endblock -%}

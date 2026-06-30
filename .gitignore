@@ -1,0 +1,26 @@
+# === emela-attendance-edge — repo = l'app SEULE (front offline + back). Bench/vendor montés au déploiement. ===
+
+# Secrets / env — NE JAMAIS pousser
+.env
+.env.*
+*secret*
+*.key
+*.pem
+*.token
+
+# Caches / build régénérables
+__pycache__/
+*.pyc
+*.pyo
+node_modules/
+*.egg-info/
+dist/
+build/
+.DS_Store
+
+# Bench / site — montés SÉPARÉMENT au déploiement (ancrés à la racine pour NE PAS
+# masquer le module source attendance_edge/config/)
+/sites/
+/config/
+/env/
+/logs/

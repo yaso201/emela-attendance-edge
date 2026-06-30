@@ -1,0 +1,18 @@
+{
+  "name": "present-lanem",
+  "short_name": "present-lanem",
+  "description": "Signature locale de presence LaNEM",
+  "start_url": "/present-lanem",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAFBFC",
+  "theme_color": "#0A2463",
+  "icons": [
+    {
+      "src": "/assets/attendance_edge/img/present-lanem.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

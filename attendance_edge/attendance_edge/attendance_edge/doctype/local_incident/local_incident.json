@@ -1,0 +1,22 @@
+{
+  "name": "Local Incident",
+  "module": "Attendance Edge",
+  "doctype": "DocType",
+  "autoname": "LINC-.YYYY.-.#####",
+  "description": "Local technical incident log. Ref: D4 TODO-ATT-DATA-LOCAL-008.",
+  "track_changes": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {"fieldname": "incident_type", "fieldtype": "Select", "label": "Incident Type", "options": "Network\nSync\nClock Drift\nServer\nSecurity\nOther", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "severity", "fieldtype": "Select", "label": "Severity", "options": "Low\nMedium\nHigh\nCritical", "default": "Medium", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "detected_at", "fieldtype": "Datetime", "label": "Detected At", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "local_session", "fieldtype": "Link", "label": "Local Session", "options": "Local Session"},
+    {"fieldname": "description", "fieldtype": "Small Text", "label": "Description"},
+    {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nAcknowledged\nClosed", "default": "Open", "reqd": 1, "in_standard_filter": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ],
+  "sort_field": "detected_at",
+  "sort_order": "DESC"
+}

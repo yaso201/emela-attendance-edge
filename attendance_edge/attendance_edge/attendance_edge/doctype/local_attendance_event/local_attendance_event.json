@@ -1,0 +1,28 @@
+{
+  "name": "Local Attendance Event",
+  "module": "Attendance Edge",
+  "doctype": "DocType",
+  "autoname": "field:event_id",
+  "description": "Append-only local raw attendance event store. Ref: D4 TODO-ATT-DATA-LOCAL-004.",
+  "track_changes": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {"fieldname": "event_id", "fieldtype": "Data", "label": "Event ID", "reqd": 1, "unique": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "local_session", "fieldtype": "Link", "label": "Local Session", "options": "Local Session", "in_standard_filter": 1},
+    {"fieldname": "session_id", "fieldtype": "Data", "label": "Session ID", "reqd": 1, "in_standard_filter": 1},
+    {"fieldname": "student_id", "fieldtype": "Data", "label": "Student ID", "in_standard_filter": 1},
+    {"fieldname": "teacher_id", "fieldtype": "Data", "label": "Teacher ID", "in_standard_filter": 1},
+    {"fieldname": "event_type", "fieldtype": "Select", "label": "Event Type", "options": "session_opened\nsession_closed\nsession_auto_closed\nsession_auto_closed_post_restart\nstudent_signature_received\nstudent_signature_validated\nstudent_signature_rejected\nstudent_provisional_checkin\nteacher_manual_mark\nleave_applied\npaper_mode_used\nincident_detected", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "event_time", "fieldtype": "Datetime", "label": "Event Time", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "attendance_state", "fieldtype": "Select", "label": "Attendance State", "options": "Pending Validation\nValidated\nRejected\nAttendanceCancelled\nN/A", "default": "N/A"},
+    {"fieldname": "capture_source", "fieldtype": "Select", "label": "Capture Source", "options": "Student Provisional\nStudent QR\nTeacher\nPedagogical Admin\nApproved Leave\nSystem\nN/A", "default": "N/A"},
+    {"fieldname": "payload_json", "fieldtype": "Long Text", "label": "Payload JSON"},
+    {"fieldname": "fingerprint_id", "fieldtype": "Data", "label": "Fingerprint ID"},
+    {"fieldname": "sync_status", "fieldtype": "Select", "label": "Sync Status", "options": "Pending\nQueued\nSynced\nFailed", "default": "Pending", "in_standard_filter": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+  ],
+  "sort_field": "event_time",
+  "sort_order": "DESC"
+}

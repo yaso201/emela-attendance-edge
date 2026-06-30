@@ -1,0 +1,40 @@
+{
+  "name": "Local Session",
+  "module": "Attendance Edge",
+  "doctype": "DocType",
+  "autoname": "field:attendance_session_id",
+  "description": "Local attendance session operated by attendance_edge. Ref: D4 TODO-ATT-DATA-LOCAL-001.",
+  "track_changes": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {"fieldname": "attendance_session_id", "fieldtype": "Data", "label": "Attendance Session ID", "reqd": 1, "unique": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "session_id", "fieldtype": "Data", "label": "Planning Session ID", "reqd": 1, "in_standard_filter": 1},
+    {"fieldname": "session_version", "fieldtype": "Int", "label": "Session Version", "default": "1", "reqd": 1},
+    {"fieldname": "module_code", "fieldtype": "Data", "label": "Module"},
+    {"fieldname": "student_group", "fieldtype": "Data", "label": "Student Group", "in_standard_filter": 1},
+    {"fieldname": "teacher_id", "fieldtype": "Data", "label": "Teacher ID", "in_standard_filter": 1},
+    {"fieldname": "replacement_teacher_id", "fieldtype": "Data", "label": "Replacement Teacher ID"},
+    {"fieldname": "department", "fieldtype": "Data", "label": "Department"},
+    {"fieldname": "session_date", "fieldtype": "Date", "label": "Session Date", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "planned_start", "fieldtype": "Datetime", "label": "Planned Start", "reqd": 1},
+    {"fieldname": "planned_end", "fieldtype": "Datetime", "label": "Planned End", "reqd": 1},
+    {"fieldname": "room", "fieldtype": "Data", "label": "Room"},
+    {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Pending\nOpen\nClosed\nSessionCancelled\nIncident", "default": "Pending", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "planning_sync_updated", "fieldtype": "Check", "label": "Planning Sync Updated"},
+    {"fieldname": "rectification_requested", "fieldtype": "Check", "label": "Rectification Requested"},
+    {"fieldname": "paper_mode_used", "fieldtype": "Check", "label": "Paper Mode Used"},
+    {"fieldname": "planning_conflict_detected", "fieldtype": "Check", "label": "Planning Conflict Detected"},
+    {"fieldname": "sync_status", "fieldtype": "Select", "label": "Sync Status", "options": "Pending\nSynced\nFailed", "default": "Pending", "in_standard_filter": 1},
+    {"fieldname": "opened_at", "fieldtype": "Datetime", "label": "Opened At"},
+    {"fieldname": "closed_at", "fieldtype": "Datetime", "label": "Closed At"},
+    {"fieldname": "secret_session", "fieldtype": "Password", "label": "Secret Session", "hidden": 1, "read_only": 1},
+    {"fieldname": "secret_generated_at", "fieldtype": "Datetime", "label": "Secret Generated At", "read_only": 1},
+    {"fieldname": "secret_purge_after", "fieldtype": "Datetime", "label": "Secret Purge After", "read_only": 1},
+    {"fieldname": "incident_reason", "fieldtype": "Small Text", "label": "Incident Reason"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ],
+  "sort_field": "session_date",
+  "sort_order": "DESC"
+}

@@ -1,0 +1,87 @@
+{%- extends "templates/web.html" -%}
+
+{%- block head_include -%}
+{{ super() }}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0A2463">
+<link rel="manifest" href="/assets/attendance_edge/manifest/present-lanem.webmanifest">
+<link rel="stylesheet" href="/assets/attendance_edge/css/attendance_ui.css">
+{%- endblock -%}
+
+{%- block page_content -%}
+<main class="ae-shell ae-student" data-page="present-lanem">
+    <div id="offline-banner" class="ae-offline-banner" hidden>Hors connexion — tes signatures seront envoyees automatiquement.</div>
+    <section class="ae-student-hero" id="student-hero" aria-label="present-lanem">
+        <div class="ae-student-hero__logo" aria-hidden="true">L</div>
+        <div>
+            <p class="ae-kicker">Signature locale</p>
+            <h1>present-lanem</h1>
+        </div>
+    </section>
+
+    <section class="ae-alert" id="student-message" role="alert" aria-live="assertive" hidden></section>
+
+    <section class="ae-login-panel" id="student-auth-panel" aria-label="Connexion etudiant">
+        <label>
+            <span>Identifiant etudiant</span>
+            <input id="student-id" autocomplete="username" inputmode="text">
+        </label>
+        <label>
+            <span>Mot de passe</span>
+            <input id="student-password" type="password" autocomplete="current-password">
+        </label>
+        <button class="ae-button ae-button-primary" id="student-login" type="button">Entrer</button>
+    </section>
+    <p class="ae-version-text">LaNEM · Ecole Nationale d'Ingenieurs · v2.4</p>
+
+    <section id="student-app-panel" hidden>
+        <div class="ae-session-header">
+            <div>
+                <p class="ae-kicker" id="student-name-label">Etudiant</p>
+                <h2>Signature de presence</h2>
+            </div>
+            <button class="ae-button ae-button-ghost" id="student-logout" type="button">Sortir</button>
+        </div>
+
+        <div class="ae-scanner">
+            <video id="qr-video" autoplay playsinline muted hidden></video>
+            <div class="ae-scanner-target" id="scanner-target"></div>
+            <div class="ae-scanner-actions">
+                <button class="ae-button ae-button-primary ae-wide" id="start-scan" type="button">Scanner</button>
+                <button class="ae-button ae-torch-button" id="toggle-torch" type="button" hidden aria-label="Torche">&#128294;</button>
+            </div>
+        </div>
+
+        <section id="manual-entry" class="ae-fallback" hidden>
+            <p class="ae-fallback__label">Si le scan ne fonctionne pas, saisis le code affiche sous le QR de l'enseignant :</p>
+            <textarea id="qr-payload" rows="4" spellcheck="false" placeholder="Colle ici le code"></textarea>
+            <button class="ae-button" id="submit-payload" type="button">Valider</button>
+        </section>
+
+        <section class="ae-session-list ae-student-sessions" aria-label="Seances accessibles">
+            <div class="ae-section-heading">
+                <h2>Mes seances</h2>
+                <button class="ae-icon-button" id="student-refresh" type="button" aria-label="Rafraichir">↻</button>
+            </div>
+            <div id="student-sessions" class="ae-stack"></div>
+        </section>
+    </section>
+
+    <section id="signature-success-overlay" class="ae-success-overlay" hidden>
+        <div class="ae-success-overlay__content">
+            <svg class="ae-success-overlay__icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="40" fill="#fff" fill-opacity="0.2"/>
+                <path d="M24 41l11 11 21-21" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p class="ae-success-overlay__course" id="success-course-name"></p>
+            <p class="ae-success-overlay__time" id="success-time"></p>
+        </div>
+    </section>
+</main>
+
+<script>
+window.attendanceEdge = window.attendanceEdge || {};
+window.attendanceEdge.csrfToken = "{{ csrf_token }}";
+</script>
+<script src="/assets/attendance_edge/js/present_lanem.js"></script>
+{%- endblock -%}

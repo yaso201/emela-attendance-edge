@@ -1,0 +1,28 @@
+{
+  "name": "Local User Teacher",
+  "module": "Attendance Edge",
+  "doctype": "DocType",
+  "autoname": "field:teacher_id",
+  "description": "Local offline copy of an Instructor user for attendance edge authentication. Ref: D4 TODO-ATT-AUTH-002.",
+  "track_changes": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {"fieldname": "teacher_id", "fieldtype": "Data", "label": "Teacher ID", "reqd": 1, "unique": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "user_id", "fieldtype": "Data", "label": "User ID", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "first_name", "fieldtype": "Data", "label": "First Name"},
+    {"fieldname": "last_name", "fieldtype": "Data", "label": "Last Name", "in_list_view": 1},
+    {"fieldname": "full_name", "fieldtype": "Data", "label": "Full Name", "in_global_search": 1},
+    {"fieldname": "password_hash", "fieldtype": "Password", "label": "Password Hash", "reqd": 1},
+    {"fieldname": "pin_hash", "fieldtype": "Password", "label": "PIN Hash"},
+    {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Active\nDisabled\nSuspended", "default": "Active", "reqd": 1, "in_standard_filter": 1},
+    {"fieldname": "permissions_json", "fieldtype": "Long Text", "label": "Permissions JSON"},
+    {"fieldname": "authorized_sessions_json", "fieldtype": "Long Text", "label": "Authorized Sessions JSON"},
+    {"fieldname": "source_version", "fieldtype": "Data", "label": "Source Version"},
+    {"fieldname": "last_synced_at", "fieldtype": "Datetime", "label": "Last Synced At", "in_standard_filter": 1}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

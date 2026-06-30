@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="present-lanem">
+  <rect width="96" height="96" rx="20" fill="#0f766e"/>
+  <path d="M24 24h20v20H24zM52 24h20v20H52zM24 52h20v20H24z" fill="#ffffff"/>
+  <path d="M54 54h8v8h-8zM66 54h6v18H54v-6h12z" fill="#fbbf24"/>
+</svg>

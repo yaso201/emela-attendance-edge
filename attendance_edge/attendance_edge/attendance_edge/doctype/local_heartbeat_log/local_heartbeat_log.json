@@ -1,0 +1,21 @@
+{
+  "name": "Local Heartbeat Log",
+  "module": "Attendance Edge",
+  "doctype": "DocType",
+  "autoname": "LHB-.YYYY.-.#####",
+  "description": "Local heartbeat emission log. Ref: D4 TODO-ATT-DATA-LOCAL-007.",
+  "track_changes": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {"fieldname": "heartbeat_time", "fieldtype": "Datetime", "label": "Heartbeat Time", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Success\nFailed", "default": "Success", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "target_url", "fieldtype": "Data", "label": "Target URL"},
+    {"fieldname": "latency_ms", "fieldtype": "Int", "label": "Latency ms"},
+    {"fieldname": "message", "fieldtype": "Small Text", "label": "Message"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ],
+  "sort_field": "heartbeat_time",
+  "sort_order": "DESC"
+}

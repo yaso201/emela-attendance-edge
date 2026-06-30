@@ -1,0 +1,130 @@
+/* =========================================================================
+   emela tokens — Design System LaNEM Institutionnel v1
+   À patcher en tête de attendance_ui.css (remplace le bloc :root existant)
+   ========================================================================= */
+
+:root {
+    /* ---- Couleurs primaires (bleu institutionnel LaNEM) ---- */
+    --color-ln-blue-900: #0A2463;
+    --color-ln-blue-800: #0D3B8C;
+    --color-ln-blue-700: #104EAC;
+    --color-ln-blue-600: #1E62C4;
+    --color-ln-blue-200: #C7D8F5;
+    --color-ln-blue-100: #E8F0FE;
+    --color-ln-blue-50:  #F4F8FF;
+
+    /* ---- Gris institutionnels ---- */
+    --color-ln-gray-950: #0F172A;
+    --color-ln-gray-900: #111827;
+    --color-ln-gray-800: #1E293B;
+    --color-ln-gray-700: #374151;
+    --color-ln-gray-600: #4B5563;
+    --color-ln-gray-500: #6B7280;
+    --color-ln-gray-400: #9CA3AF;
+    --color-ln-gray-300: #D1D5DB;
+    --color-ln-gray-200: #E1E4E8;
+    --color-ln-gray-100: #F0F2F5;
+    --color-ln-gray-50:  #FAFBFC;
+    --color-white:       #FFFFFF;
+
+    /* ---- Sémantique ---- */
+    --color-success-700: #15803D;
+    --color-success-100: #DCFCE7;
+    --color-warning-700: #92400E;
+    --color-warning-100: #FEF3C7;
+    --color-error-700:   #B91C1C;
+    --color-error-100:   #FEE2E2;
+    --color-info-700:    #0369A1;
+    --color-info-100:    #E0F2FE;
+
+    /* ---- Accent (ambre) ---- */
+    --color-accent-700: #92400E;
+    --color-accent-600: #B45309;
+    --color-accent-500: #D97706;
+    --color-accent-100: #FEF3C7;
+
+    /* ---- Alias sémantiques ---- */
+    --color-text-primary:    var(--color-ln-gray-950);
+    --color-text-secondary:  var(--color-ln-gray-600);
+    --color-text-tertiary:   var(--color-ln-gray-500);
+    --color-text-disabled:   var(--color-ln-gray-400);
+    --color-text-on-ln-blue: var(--color-white);
+    --color-text-link:       var(--color-ln-blue-700);
+    --color-text-link-hover: var(--color-ln-blue-900);
+
+    --color-surface-page:    var(--color-ln-gray-50);
+    --color-surface-base:    var(--color-white);
+    --color-surface-subtle:  var(--color-ln-gray-100);
+    --color-surface-overlay: rgba(15, 23, 42, 0.48);
+
+    --color-border-subtle:  rgba(15, 23, 42, 0.07);
+    --color-border-default: rgba(15, 23, 42, 0.12);
+    --color-border-strong:  var(--color-ln-gray-300);
+    --color-border-ln-blue: var(--color-ln-blue-900);
+
+    --color-action-primary:       var(--color-ln-blue-900);
+    --color-action-primary-hover: var(--color-ln-blue-700);
+    --color-action-secondary:     transparent;
+    --color-action-focus-ring:    var(--color-ln-blue-600);
+
+    /* ---- Typographie ---- */
+    --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-2xs:  0.6875rem;  /* 11 */
+    --font-size-xs:   0.75rem;    /* 12 */
+    --font-size-sm:   0.875rem;   /* 14 */
+    --font-size-base: 1rem;       /* 16 */
+    --font-size-lg:   1.0625rem;  /* 17 */
+    --font-size-xl:   1.25rem;    /* 20 */
+    --font-size-2xl:  1.5rem;     /* 24 */
+    --font-size-3xl:  1.875rem;   /* 30 */
+
+    /* ---- Espacement (8pt) ---- */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-11: 44px;
+
+    /* ---- Rayons ---- */
+    --radius-none: 0;
+    --radius-xs:   4px;
+    --radius-sm:   6px;
+    --radius-md:   8px;
+    --radius-lg:   12px;
+    --radius-xl:   16px;
+    --radius-full: 9999px;
+
+    /* ---- Ombres ---- */
+    --shadow-xs:        0 1px 2px rgba(15,23,42,0.04);
+    --shadow-card:      0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-card-hover:0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.03);
+    --shadow-elevated:  0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
+    --shadow-nav:       0 1px 0 rgba(0,0,0,0.05);
+    --shadow-focus:     0 0 0 3px rgba(30,98,196,0.25);
+
+    /* ---- Z-index ---- */
+    --z-raised:   10;
+    --z-dropdown: 200;
+    --z-sticky:   300;
+    --z-overlay:  400;
+    --z-modal:    500;
+    --z-toast:    600;
+
+    /* ---- Compatibilité ascendante (alias ae-* anciens) ---- */
+    --ae-bg:           var(--color-surface-page);
+    --ae-surface:      var(--color-surface-base);
+    --ae-text:         var(--color-text-primary);
+    --ae-muted:        var(--color-text-secondary);
+    --ae-border:       var(--color-border-default);
+    --ae-primary:      var(--color-ln-blue-800);
+    --ae-primary-dark: var(--color-ln-blue-700);
+    --ae-blue:         var(--color-info-700);
+    --ae-amber:        var(--color-accent-600);
+    --ae-red:          var(--color-error-700);
+    --ae-green:        var(--color-success-700);
+    --ae-shadow:       var(--shadow-card);
+}

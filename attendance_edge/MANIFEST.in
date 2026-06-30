@@ -1,0 +1,10 @@
+include README.md
+recursive-include attendance_edge *.json
+recursive-include attendance_edge *.py
+recursive-include attendance_edge *.html
+recursive-include attendance_edge *.css
+recursive-include attendance_edge *.js
+recursive-include attendance_edge *.svg
+recursive-include attendance_edge *.webmanifest
+recursive-include attendance_edge *.txt
+recursive-include attendance_edge *.md

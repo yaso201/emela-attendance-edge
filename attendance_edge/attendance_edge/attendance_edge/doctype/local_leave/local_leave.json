@@ -1,0 +1,25 @@
+{
+  "name": "Local Leave",
+  "module": "Attendance Edge",
+  "doctype": "DocType",
+  "autoname": "field:leave_id",
+  "description": "Local copy of approved leave for offline priority checks. Ref: D4 TODO-ATT-DATA-LOCAL-003.",
+  "track_changes": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {"fieldname": "leave_id", "fieldtype": "Data", "label": "Leave ID", "reqd": 1, "unique": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "student_id", "fieldtype": "Data", "label": "Student ID", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "starts_at", "fieldtype": "Datetime", "label": "Starts At", "reqd": 1, "in_standard_filter": 1},
+    {"fieldname": "ends_at", "fieldtype": "Datetime", "label": "Ends At", "reqd": 1, "in_standard_filter": 1},
+    {"fieldname": "covered_sessions_json", "fieldtype": "Long Text", "label": "Covered Sessions JSON"},
+    {"fieldname": "approved_by", "fieldtype": "Data", "label": "Approved By"},
+    {"fieldname": "approved_at", "fieldtype": "Datetime", "label": "Approved At"},
+    {"fieldname": "source_version", "fieldtype": "Data", "label": "Source Version"},
+    {"fieldname": "last_synced_at", "fieldtype": "Datetime", "label": "Last Synced At"}
+  ],
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ],
+  "sort_field": "starts_at",
+  "sort_order": "DESC"
+}
